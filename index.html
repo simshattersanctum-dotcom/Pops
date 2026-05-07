@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- TODO: confirm site title with Pops -->
+  <title>Pops · Visionary Artist · Lancaster, CA</title>
+  <meta name="description" content="Hand-painted visionary art from Lancaster, California. Original works, signed prints, and custom commissions.">
+
+  <meta property="og:title" content="Pops · Visionary Artist">
+  <meta property="og:description" content="Hand-painted visionary art from Lancaster, California.">
+  <meta property="og:image" content="images/piece-01.jpg">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #050810;
+      --bg-soft: #0c1020;
+      --text: #ece8e0;
+      --text-soft: #8e8a82;
+      --text-dim: #4a4640;
+      --accent: #b8945a;
+      --border: rgba(236, 232, 224, 0.06);
+      --border-soft: rgba(236, 232, 224, 0.12);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Subtle flower-of-life watermark behind everything */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'><g fill='none' stroke='%23ece8e0' stroke-width='0.4' opacity='0.25'><circle cx='120' cy='120' r='40'/><circle cx='120' cy='80' r='40'/><circle cx='120' cy='160' r='40'/><circle cx='85' cy='100' r='40'/><circle cx='155' cy='100' r='40'/><circle cx='85' cy='140' r='40'/><circle cx='155' cy='140' r='40'/></g></svg>");
+      background-size: 240px 240px;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    /* THIRD EYE MARK */
+    .mark {
+      display: block;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 2rem;
+      color: var(--text);
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding-bottom: 3rem;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(3rem, 9vw, 4.5rem);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .hero .location {
+      color: var(--text-soft);
+      font-style: italic;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      letter-spacing: 0.08em;
+      font-size: 1rem;
+    }
+
+    .hero .tagline {
+      margin-top: 1.5rem;
+      color: var(--accent);
+      font-style: italic;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* HERO IMAGE */
+    .hero-image-wrap {
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .hero-image {
+      width: 100%;
+      border-radius: 2px;
+      display: block;
+    }
+
+    /* BIO — pulled quote treatment */
+    .bio {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      line-height: 1.6;
+      color: var(--text);
+      text-align: center;
+      max-width: 580px;
+      margin: 4rem auto;
+      font-style: italic;
+      font-weight: 300;
+      position: relative;
+      padding: 0 2rem;
+    }
+
+    .bio::before,
+    .bio::after {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--accent);
+      font-size: 3rem;
+      line-height: 0;
+      opacity: 0.6;
+    }
+
+    .bio::before {
+      content: '"';
+      position: absolute;
+      top: 0.5rem;
+      left: 0;
+    }
+
+    .bio::after {
+      content: '"';
+      position: absolute;
+      bottom: -0.5rem;
+      right: 0;
+    }
+
+    /* DIVIDER */
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 4rem 0 2.5rem;
+      color: var(--text-dim);
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: var(--border-soft);
+    }
+
+    .divider svg {
+      width: 16px;
+      height: 16px;
+      opacity: 0.6;
+    }
+
+    /* SECTION HEADERS */
+    .section-header {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    .gallery img,
+    .gallery .placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 2px;
+      display: block;
+    }
+
+    .gallery .placeholder {
+      background: var(--bg-soft);
+      border: 1px dashed var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 1rem;
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* ACTION CARDS */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    .action-card {
+      background: rgba(12, 16, 32, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 1.75rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.3s, background 0.3s;
+      display: block;
+      backdrop-filter: blur(8px);
+    }
+
+    .action-card:hover {
+      border-color: var(--accent);
+      background: rgba(184, 148, 90, 0.05);
+    }
+
+    .action-card h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .action-card p {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .action-card .arrow {
+      color: var(--accent);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      font-weight: 400;
+    }
+
+    /* FESTIVAL */
+    .festival {
+      border: 1px solid var(--border-soft);
+      border-radius: 2px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      margin-bottom: 4rem;
+      background: rgba(12, 16, 32, 0.4);
+    }
+
+    .festival .label {
+      color: var(--accent);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 1rem;
+    }
+
+    .festival .name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.03em;
+    }
+
+    .festival .details {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid var(--border-soft);
+      padding-top: 2.5rem;
+      text-align: center;
+    }
+
+    .footer .label {
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer .links {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .footer a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      .container { padding: 3rem 1.25rem 2rem; }
+      .gallery { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+      .bio { font-size: 1.25rem; padding: 0 1.5rem; }
+      .mark { width: 130px; height: 130px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ============================================ -->
+    <!-- THIRD EYE / SACRED GEOMETRY MARK             -->
+    <!-- ============================================ -->
+    <svg class="mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" fill="none" stroke-width="0.6" aria-label="Third eye sacred geometry mark">
+      <circle cx="100" cy="100" r="92" stroke-opacity="0.3"/>
+      <circle cx="100" cy="100" r="78" stroke-opacity="0.18"/>
+
+      <polygon points="100,18 178,143 22,143" stroke-opacity="0.18"/>
+      <polygon points="100,182 178,57 22,57" stroke-opacity="0.18"/>
+
+      <circle cx="78" cy="100" r="32" stroke-opacity="0.5"/>
+      <circle cx="122" cy="100" r="32" stroke-opacity="0.5"/>
+
+      <ellipse cx="100" cy="100" rx="24" ry="14" stroke-opacity="0.9" stroke-width="0.8"/>
+      <circle cx="100" cy="100" r="8" stroke-opacity="0.9" stroke-width="0.8"/>
+      <circle cx="100" cy="100" r="3" fill="currentColor" fill-opacity="0.9" stroke="none"/>
+
+      <line x1="100" y1="50" x2="100" y2="80" stroke-opacity="0.4" stroke-width="0.4"/>
+      <line x1="100" y1="120" x2="100" y2="150" stroke-opacity="0.4" stroke-width="0.4"/>
+
+      <circle cx="100" cy="8" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="100" cy="192" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="8" cy="100" r="1.5" fill="currentColor" stroke="none"/>
+      <circle cx="192" cy="100" r="1.5" fill="currentColor" stroke="none"/>
+    </svg>
+
+    <header class="hero">
+      <h1>Pops</h1>
+      <p class="location">Lancaster, California</p>
+      <!-- TODO: get a single italic line from Pops. Hint at his philosophy without being heavy-handed. -->
+      <p class="tagline">[A single line in his voice — what does he see?]</p>
+    </header>
+
+    <!-- HERO IMAGE — TODO: the showstopper, hi-res -->
+    <div class="hero-image-wrap">
+      <img src="images/piece-01.jpg" alt="Latest work by Pops" class="hero-image">
+    </div>
+
+    <!-- ============================================ -->
+    <!-- BIO — pulled quote, in his voice             -->
+    <!-- TODO: ask Pops "What do you see that other   -->
+    <!-- people miss? What does it cost you?"         -->
+    <!-- Edit answer to 2-3 sentences. Confessional   -->
+    <!-- tone. Don't sanitize.                        -->
+    <!-- ============================================ -->
+    <p class="bio">
+      [Two or three sentences in Pops's own voice. Should land like a confession, not a marketing line.]
+    </p>
+
+    <div class="divider">
+      <svg viewBox="0 0 16 16" stroke="currentColor" fill="none" stroke-width="0.8">
+        <circle cx="8" cy="8" r="3"/>
+        <circle cx="8" cy="8" r="6" stroke-opacity="0.5"/>
+      </svg>
+    </div>
+
+    <h2 class="section-header">Selected work</h2>
+    <div class="gallery">
+      <img src="images/piece-01.jpg" alt="Untitled piece by Pops">
+      <img src="images/piece-02.jpg" alt="Untitled piece by Pops">
+      <div class="placeholder">[needs photo]</div>
+      <div class="placeholder">[needs photo]</div>
+      <div class="placeholder">[needs photo]</div>
+      <div class="placeholder">[needs photo]</div>
+    </div>
+
+    <div class="divider">
+      <svg viewBox="0 0 16 16" stroke="currentColor" fill="none" stroke-width="0.8">
+        <circle cx="8" cy="8" r="3"/>
+        <circle cx="8" cy="8" r="6" stroke-opacity="0.5"/>
+      </svg>
+    </div>
+
+    <h2 class="section-header">Take something home</h2>
+    <div class="actions">
+
+      <a href="mailto:pops.studio@gmail.com?subject=Print%20inquiry" class="action-card">
+        <h3>A print</h3>
+        <p>Signed, numbered giclée prints. [Open editions $XX, limited editions $XXX.]</p>
+        <span class="arrow">SHOP PRINTS →</span>
+      </a>
+
+      <a href="mailto:pops.studio@gmail.com?subject=Original%20inquiry&body=Hi%20Pops%2C%0A%0AI'm%20interested%20in%20learning%20more%20about%3A%20%5Bpiece%20name%2Fdescription%5D%0A%0A" class="action-card">
+        <h3>An original</h3>
+        <p>Each piece is one-of-one. Tell us which one caught your eye.</p>
+        <span class="arrow">INQUIRE →</span>
+      </a>
+
+      <a href="mailto:pops.studio@gmail.com?subject=Commission%20request&body=Hi%20Pops%2C%0A%0ABudget%3A%20%0ASize%3A%20%0AConcept%3A%20%0ATimeline%3A%20%0A%0A" class="action-card">
+        <h3>A piece made for you</h3>
+        <p>Limited commissions. [Or remove this whole card — Pops's call.]</p>
+        <span class="arrow">START A COMMISSION →</span>
+      </a>
+
+    </div>
+
+    <div class="festival">
+      <div class="label">FIND HIM IN PERSON</div>
+      <div class="name">Lightning in a Bottle</div>
+      <div class="details">[Dates · Camp / live painting location TBD]</div>
+    </div>
+
+    <footer class="footer">
+      <div class="label">FOLLOW</div>
+      <div class="links">
+        <a href="https://instagram.com/[handle]" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:pops.studio@gmail.com">Email</a>
+      </div>
+    </footer>
+
+  </div>
+
+</body>
+</html>
